@@ -5,7 +5,7 @@ const Card = ({ image, title }) => {
 
     return (
         <div className={styles.countryCard}>
-            <img src={image} alt={`image of ${title}`} />
+            <img src={image} alt={title} />
             <p>{title}</p>
         </div>
     );
@@ -27,12 +27,7 @@ const Countries = () => {
     }, []);
 
     function findCurrentList(searchStr) {
-        return countryList.filter((country) => {
-            return (
-            country.name.common.toLowerCase().includes(searchStr) 
-            || country.name.official.toLowerCase().includes(searchStr)
-            )
-        });
+        return countryList.filter((country) => country.name.common.toLowerCase().includes(searchStr));
     }
 
     // const currentSearchList = useMemo(
