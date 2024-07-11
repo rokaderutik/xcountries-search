@@ -14,14 +14,14 @@ const Card = ({ image, title }) => {
 const Countries = () => {
     const [searchData, setSearchData] = useState('');
     const [countryList, setCountryList] = useState([]);
-    const [currentCountryList, setCurrentCountryList] = useState([]);
+    // const [currentCountryList, setCurrentCountryList] = useState([]);
 
     useEffect(() => {
         fetch('https://restcountries.com/v3.1/all')
         .then(res => res.json())
         .then(data => {
             setCountryList(data)
-            setCurrentCountryList(data);
+            // setCurrentCountryList(data);
         })
         .catch((error) => console.error('Error :',error))
     }, []);
@@ -42,18 +42,27 @@ const Countries = () => {
         
     // }
 
-    const findCurrentList = useMemo(() => {
-        return searchStr => {
-          return countryList.filter(country => country.name.common.toLowerCase().includes(searchStr))
-        };
-    }, [searchData]);
+    // const findCurrentList = useMemo(() => {
+    //     return searchStr => {
+    //       return countryList.filter(country => country.name.common.toLowerCase().includes(searchStr))
+    //     };
+    // }, [searchData]);
+    
+    // function handleChange(e) {
+    //     const searchStr = e.target.value.toLowerCase();
+    //     setSearchData(e.target.value);
+    
+    //     const currentSearchList = findCurrentList(searchStr);
+    //     setCurrentCountryList(currentSearchList);
+    // }
+
+    const currentCountryList = useMemo(() => {
+        const searchStr = searchData.toLowerCase();
+        return countryList.filter(country => country.name.common.toLowerCase().includes(searchStr));
+    }, [searchData, countryList]);
     
     function handleChange(e) {
-        const searchStr = e.target.value.toLowerCase();
         setSearchData(e.target.value);
-    
-        const currentSearchList = findCurrentList(searchStr);
-        setCurrentCountryList(currentSearchList);
     }
 
     return (
