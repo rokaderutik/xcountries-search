@@ -1,10 +1,10 @@
-import styles from './Countries.module.css'
+import './Countries.css';
 import { useState, useEffect, useMemo } from 'react';
 
 const Card = ({ image, title }) => {
 
     return (
-        <div className={styles.countryCard}>
+        <div className='countryCard'>
             <img src={image} alt={title} />
             <p>{title}</p>
         </div>
@@ -49,7 +49,7 @@ const Countries = () => {
 
     return (
         <div>
-            <div className={styles.inputDiv}>
+            <div className="inputDiv">
                 <input 
                     type='text'
                     value={searchData}
@@ -58,7 +58,7 @@ const Countries = () => {
                 />
             </div>
             <hr />
-            <div className={styles.cardContainer}>
+            <div className="cardContainer">
                 {
                     currentCountryList.map((country) => {
                         return <Card 
