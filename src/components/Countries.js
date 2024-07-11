@@ -26,25 +26,34 @@ const Countries = () => {
         .catch((error) => console.error('Error :',error))
     }, []);
 
-    function findCurrentList(searchStr) {
-        return countryList.filter((country) => country.name.common.toLowerCase().includes(searchStr));
-    }
+    // function findCurrentList(searchStr) {
+    //     return countryList.filter((country) => country.name.common.toLowerCase().includes(searchStr));
+    // }
 
-    // const currentSearchList = useMemo(
-    //     () => findCurrentList(searchData.toLowerCase()),
-    //     [searchData]
-    // );
-    // setCurrentCountryList(currentSearchList);
 
+    // function handleChange(e) {
+    //     setSearchData(e.target.value);
+
+    //     const searchStr = e.target.value.toLowerCase();
+
+    //     const currentSearchList = findCurrentList(searchStr);
+        
+    //     setCurrentCountryList(currentSearchList);
+        
+    // }
+
+    const findCurrentList = useMemo(() => {
+        return searchStr => {
+          return countryList.filter(country => country.name.common.toLowerCase().includes(searchStr))
+        };
+    }, [searchData]);
+    
     function handleChange(e) {
-        setSearchData(e.target.value);
-
         const searchStr = e.target.value.toLowerCase();
-
+        setSearchData(e.target.value);
+    
         const currentSearchList = findCurrentList(searchStr);
-        
         setCurrentCountryList(currentSearchList);
-        
     }
 
     return (
